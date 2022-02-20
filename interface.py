@@ -1,5 +1,7 @@
 from hash import *
 from tkinter import *
+import tkinter
+import hashlib
 
 
 class Application:
@@ -35,12 +37,29 @@ class Application:
         self.generator_hash["text"] = "Gerar"
         self.generator_hash["font"] = self.fontePadrao
         self.generator_hash["width"] = 30
-        self.generator_hash["command"] = self.hash_generator
+        self.generator_hash["command"] = self.hash_Password
         self.generator_hash.pack(side = RIGHT)
         
-    def hash_generator():
-        h_password = hashes.hash_Password
-        return h_password
+    def hash_Password(self):
+        pass_gen = self.txtpassword.get()
+        hash_pass = hashlib.md5()
+        text = pass_gen.encode('utf-8')
+        hash_pass.update(text)
+        print(hash_pass.hexdigest())
+    
+    def hashe_exbition(self):
+        new_window = Toplevel(root)
+        new_window.title("Hashe Exibition")
+        new_window.geometry("300x300")
+        
+        self.title_hash = tkinter.Label(new_window, text="Your Hash", font=self.fontePadrao, pady="10")
+        
+        self.HASHES = tkinter.Label(new_window, show=self.hash_password)
+        
+        self.title_hash.pack()
+        
+         
+         
     
 
 root = Tk()
