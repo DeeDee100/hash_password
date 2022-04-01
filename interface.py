@@ -37,8 +37,14 @@ class Application:
         self.generator_hash["text"] = "Gerar"
         self.generator_hash["font"] = self.fontePadrao
         self.generator_hash["width"] = 30
-        self.generator_hash["command"] = self.hash_Password
+        self.generator_hash["command"] = self.combineFunc(self.hash_Password, self.hashe_exbition)
         self.generator_hash.pack(side = RIGHT)
+    
+    def combineFunc(self, *funcs):
+        def combinedFunc(*args, **kwargs):
+            for f in funcs:
+                f(*args, **kwargs)
+        return combinedFunc
         
     def hash_Password(self):
         pass_gen = self.txtpassword.get()
@@ -54,14 +60,11 @@ class Application:
         
         self.title_hash = tkinter.Label(new_window, text="Your Hash", font=self.fontePadrao, pady="10")
         
-        self.HASHES = tkinter.Label(new_window, show=self.hash_password)
-        
+        self.HASHES = tkinter.Label(new_window, show=hash_Password(self))
+        self.HASHES.pack()
         self.title_hash.pack()
         
          
-         
-    
-
 root = Tk()
 Application(root)
 root.mainloop()
