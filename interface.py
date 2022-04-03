@@ -53,11 +53,11 @@ class Application:
     def hashe_exbition(self):
         new_window = Toplevel(root)
         new_window.title("Hashe Exibition")
-        new_window.geometry("300x300")
+        new_window.geometry("400x300")
 
-        self.title_hash = tkinter.Label(new_window, text="Your Hash", font=self.fontePadrao, pady="10")
-        self.HASHES = tkinter.Label(new_window, text=self.hash_Password())
-        self.HASHES.pack()
+        self.title_hash = tkinter.Label(new_window, text="Your Hash", font=(self.fontePadrao, 13), pady="100")
+        self.HASHES = tkinter.Label(new_window, text=self.hash_Password(), font=(self.fontePadrao,14))
+        self.HASHES.place(relx=0.5, rely=0.5, anchor='center')
         self.title_hash.pack()
 
 
