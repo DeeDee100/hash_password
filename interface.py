@@ -16,7 +16,8 @@ class Application:
         self.segundoContainer["padx"] = "5"
         self.segundoContainer.pack()
 
-        self.password = Label(self.segundoContainer, text="Password")
+        self.password = Label(self.segundoContainer, text="Password", height=5, width=0,
+                              font=("Calibri", 20))
         self.password.pack(side=LEFT)
 
         self.terceiroContainer = Frame(master)
