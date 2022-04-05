@@ -1,5 +1,7 @@
 from tkinter import Tk, Label, Entry, Frame, Button, Toplevel, RIGHT, LEFT
 import tkinter
+import secrets
+import string
 import hashlib
 
 
@@ -36,17 +38,21 @@ class Application:
         self.generator_hash["text"] = "Gerar"
         self.generator_hash["font"] = self.fontePadrao
         self.generator_hash["width"] = 30
-        self.generator_hash["command"] = self.hash_and_exhibt
+        self.generator_hash["command"] = self.hashe_exbition
         self.generator_hash.pack(side=RIGHT)
+
+    def generate_passord(self):
+        chars = string.ascii_letters + string.digits + "!@#$%^&*()"
+        pw = "".join(secrets.choice(chars) for i in range(10))
+        return pw
 
     def hash_and_exhibt(self):
         self.hash_Password()
         self.hashe_exbition()
 
-    def hash_Password(self):
-        pass_gen = self.txtpassword.get()
+    def hash_Password(self, password):
         hash_pass = hashlib.md5()
-        text = pass_gen.encode("utf-8")
+        text = password.encode("utf-8")
         hash_pass.update(text)
         return hash_pass.hexdigest()
 
@@ -55,9 +61,27 @@ class Application:
         new_window.title("Hashe Exibition")
         new_window.geometry("400x300")
 
-        self.title_hash = tkinter.Label(new_window, text="Your Hash", font=(self.fontePadrao, 13), pady="100")
-        self.HASHES = tkinter.Label(new_window, text=self.hash_Password(), font=(self.fontePadrao,14))
-        self.HASHES.place(relx=0.5, rely=0.5, anchor='center')
+        pass_gen = self.txtpassword.get()
+        self.title_hash = tkinter.Label(
+            new_window, text="Your Hash", font=(self.fontePadrao, 13), pady="100"
+        )
+        if pass_gen == "":
+            new_passs = self.generate_passord()
+            self.HASHES = tkinter.Label(
+                new_window,
+                text=self.hash_Password(new_passs),
+                font=(self.fontePadrao, 14),
+            )
+        else:
+            presalt = self.generate_passord()
+            postsalt = self.generate_passord()
+            pass_gen = presalt + pass_gen + postsalt
+            self.HASHES = tkinter.Label(
+                new_window,
+                text=self.hash_Password(pass_gen),
+                font=(self.fontePadrao, 14),
+            )
+        self.HASHES.place(relx=0.5, rely=0.5, anchor="center")
         self.title_hash.pack()
 
 
