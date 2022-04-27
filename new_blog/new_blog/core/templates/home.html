@@ -1,0 +1,24 @@
+{% extends 'model-page.html' %}
+
+
+{% block content %}
+    <titulo>Home</titulo>
+
+    <h1>Home</h1>
+    <a href="posts/">
+    <button type='button'>New Post</button>
+    </a>
+    <ul style="font-size: 18px">
+        {% for post in posts %}
+            <li>
+                <div> 
+                    <h1> {{ post.title}} </h1>
+                    {% if post.up_image %}
+                        <img src="{{ post.up_image.url }}">
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
